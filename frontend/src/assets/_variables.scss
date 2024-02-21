@@ -1,0 +1,4 @@
+// _variables.scss
+$main-color: #7979799f; // Replace with your desired main color
+$hover-color: lighten($main-color, 10%); // Lighter on hover
+$active-color: darken($main-color, 10%); // Darker when active/clicked

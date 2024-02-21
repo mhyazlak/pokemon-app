@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: pkm
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "33061:3306"  # Map container port 3306 to host port 3306
