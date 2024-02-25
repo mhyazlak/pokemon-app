@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "Pokemon")
+@Table(name = "POKEMON_VIEW")
 @AllArgsConstructor
 @NoArgsConstructor
 public class PokemonDTO {

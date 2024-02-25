@@ -1,3 +1,5 @@
+// This is being used whenever this AccessRole annotation is being used on controller methods
+// for basic Rolebased Access Control
 package com.pkm.pokemonapp.aspect;
 
 import com.pkm.pokemonapp.annotation.AccessRole;
@@ -20,11 +22,9 @@ public class RoleAspect {
 
     @Around("execution(* com.pkm.pokemonapp.controller.*.*(..)) and @annotation(accessRole)")
     public Object checkPermission(final ProceedingJoinPoint joinPoint, final AccessRole accessRole) throws Throwable {
-
         final AuthorizedUser user = (AuthorizedUser) SessionUtil.getSession().getAttribute("user");
         final List<Role> userRoles = Arrays.asList(accessRole.roles());
         if (userRoles.stream().anyMatch(r -> r == user.getRole())) {
-
             return joinPoint.proceed();
         }
         throw new Exception(user.getUser() + " has no permission.");

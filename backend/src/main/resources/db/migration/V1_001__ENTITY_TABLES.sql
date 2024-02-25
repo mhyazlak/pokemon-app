@@ -1,5 +1,5 @@
 CREATE TABLE Pokemon (
-    id                    BIGINT AUTO_INCREMENT NOT NULL,
+    id                    BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name                  VARCHAR(25) NOT NULL,
     type_one              ENUM(
                               'NORMAL', 'FIRE', 'WATER', 'ELECTRIC', 'GRASS', 'ICE',
@@ -18,8 +18,7 @@ CREATE TABLE Pokemon (
     base_spd              INT NOT NULL,
     base_spe              INT NOT NULL,
     sprite                VARCHAR(200) NOT NULL,
-    icon_b64 TEXT,
-    PRIMARY KEY (id)
+    icon_b64 TEXT
 );
 
 CREATE TABLE EvolutionChain (
@@ -31,3 +30,4 @@ CREATE TABLE EvolutionChain (
     stage_three VARCHAR(255),
     triggered_by VARCHAR(255)
 );
+

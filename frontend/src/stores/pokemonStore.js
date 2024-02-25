@@ -1,7 +1,6 @@
 // stores/pokemonStore.js
 import { defineStore } from 'pinia';
-import { readAll } from '@/services/pokemonService';
-import { useToastStore } from './toastStore';
+import { pokemonService } from '@/services/pokemonService';
 //import { info, error } from '@/services/toastService';
 
 
@@ -16,15 +15,12 @@ export const usePokemonStore = defineStore('pokemon', {
   }),
   actions: {
     async fetchPokemons() {
-      const toast = useToastStore();
 
       try {
-        const data = await readAll(this.search, this.sort, this.typeFilters);
+        const data = await pokemonService.readAll(this.search, this.sort, this.typeFilters);
         this.pokemonList = data;
-        toast.showSuccess({ summary: 'Success', detail: `Pokemons ${data.length} fetched successfully` });
 
       } catch (error) {
-        toast.showError({ summary: 'Error', detail: error });
         console.error('Error fetching pokemons:', error);
       }
     },
