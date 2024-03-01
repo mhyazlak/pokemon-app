@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "TeamMember")
@@ -29,5 +31,7 @@ public class TeamMemberDTO {
     @JoinColumn(name = "pokemon_id", nullable = false, insertable = false, updatable = false)
     private PokemonDTO pokemon;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<MoveDTO> moveset;
 
 }

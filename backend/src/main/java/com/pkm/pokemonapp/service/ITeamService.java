@@ -14,4 +14,6 @@ public interface ITeamService {
     public TeamDTO selectTeam(long teamId, UserDTO user);
 
     public void saveTeamConfig(TeamDTO team, UserDTO user);
+
+    public TeamDTO getSelectedTeam(long userId);
 }

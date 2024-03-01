@@ -13,6 +13,7 @@ public class TeamDAO {
 
     private static final String SELECT_TEAM = "SELECT * FROM Team WHERE id = ?1";
     private static final String SELECT_TEAMLIST = "SELECT * FROM Team WHERE user_id = ?1";
+    private static final String READ_SELECTED_TEAM = "SELECT * FROM Team WHERE user_id = ?1 and selected = 1";
 
     private static final String CREATE_TEAM = "CALL CREATE_TEAM(?1, ?2)";
 
@@ -35,6 +36,12 @@ public class TeamDAO {
     public TeamDTO selectTeam(long teamId) {
         Query query = entityManager.createNativeQuery(SELECT_TEAM, TeamDTO.class);
         query.setParameter(1, teamId);
+        return (TeamDTO) query.getSingleResult();
+    }
+
+    public TeamDTO getSelectedTeam(long userId) {
+        Query query = entityManager.createNativeQuery(READ_SELECTED_TEAM, TeamDTO.class);
+        query.setParameter(1, userId);
         return (TeamDTO) query.getSingleResult();
     }
 }

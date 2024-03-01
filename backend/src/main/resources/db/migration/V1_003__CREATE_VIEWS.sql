@@ -26,7 +26,7 @@ CREATE VIEW FAMILY_TREE_VIEW AS
     SELECT
         p.id,
         p.name,
-        p.type_one ,
+        p.type_one,
         p.type_two,
         p.icon_b64,
         ec.triggered_by,
@@ -41,3 +41,19 @@ CREATE VIEW FAMILY_TREE_VIEW AS
         ec.stage_one = ec2.stage_one
     JOIN Pokemon tp ON
         ec2.pokemon_name = tp.name;
+
+CREATE VIEW MOVESET_VIEW AS
+	SELECT
+		mo.id move_id,
+		mo.name name,
+		mo.`type` 'type',
+		mo.`power` 'power',
+		mo.accuracy
+	FROM
+		TeamMember tm
+		JOIN Moveset m ON
+			tm.id = m.member_id
+		JOIN Move mo ON
+			m.move_id = mo.id;
+
+

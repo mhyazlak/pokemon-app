@@ -21,7 +21,6 @@ public class AuthenticationService {
     @Autowired
     private UserDAO userDAO;
 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired

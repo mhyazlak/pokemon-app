@@ -81,4 +81,12 @@ public class TeamServiceImpl implements ITeamService {
         // Save other changes to team as necessary...
     }
 
+    @Override
+    public TeamDTO getSelectedTeam(long userId) {
+        TeamDTO team = teamDAO.getSelectedTeam(userId);
+        List<TeamMemberDTO> members = memberService.readTeamMembers(team.getId());
+        team.setMembers(members);
+        return team;
+    }
+
 }
