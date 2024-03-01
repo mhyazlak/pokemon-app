@@ -12,6 +12,7 @@
 	<artifactId>pokemon-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Pokemon Web Application</name>
+	<packaging>jar</packaging>
 	<description>Spring Boot application for a Pokémon app</description>
 	<properties>
 		<java.version>21</java.version>
