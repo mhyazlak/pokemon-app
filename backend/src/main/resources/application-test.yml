@@ -1,0 +1,44 @@
+server:
+  servlet:
+    context-path: / # Uncomment this line if you want to set the context path
+  error:
+    path: /error # Uncomment this line if you want to set the error path
+
+app:
+  debug: false
+  version: ${BUILD_ID}
+  filterSanitiser: '[^\-a-zA-Z0-9??????? ]'
+
+catalina:
+  home: /usr/local/tomcat/
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${JDBC_DB_URL}
+    username: ${JDBC_DB_USER}
+    password: ${JDBC_DB_PASSWORD}
+  jpa:
+    database: default
+    database-platform: default
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      properties:
+        hibernate:
+          id:
+            new_generator_mappings: false
+          dialect: org.hibernate.dialect.MariaDBDialect
+          enable_lazy_load_no_trans: true
+          legacy_limit_handler: true
+    generate-ddl: false
+  thymeleaf:
+    prefix: classpath:/static/vue-dist/
+  banner:
+    location: classpath:/META-INF/banner.txt
+
+logging:
+  level:
+    root: WARN
