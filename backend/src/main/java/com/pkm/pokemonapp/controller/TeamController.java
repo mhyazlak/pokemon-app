@@ -14,7 +14,7 @@ import com.pkm.pokemonapp.enums.Role;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/api/team")
 @Slf4j
 public class TeamController {
