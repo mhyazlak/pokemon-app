@@ -15,16 +15,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  server: {
-    http2: false,
-    proxy: {
-      // Proxying WebSocket requests
-      '/ws': {
-        target: 'ws://localhost:8080',
-        ws: true,
-        changeOrigin: true,
-      },
-
-    }
-  }
 });

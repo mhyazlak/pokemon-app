@@ -38,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
+    
     @Bean(name = "preAuthProvider")
     PreAuthenticatedAuthenticationProvider preauthAuthProvider() throws Exception {
         final PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();

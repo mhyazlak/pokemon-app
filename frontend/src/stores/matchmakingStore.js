@@ -8,7 +8,6 @@ export const useMatchmakingStore = defineStore('matchmaking', {
     inBattle: false,
     stompClient: null,
     sessionId: null,
-    //socket: new WebSocket('ws://localhost:8080/ws'),
     socket: null,
   }),
   actions: {
