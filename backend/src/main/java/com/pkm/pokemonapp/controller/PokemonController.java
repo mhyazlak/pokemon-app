@@ -1,6 +1,8 @@
 package com.pkm.pokemonapp.controller;
 
+import com.pkm.pokemonapp.annotation.AccessRole;
 import com.pkm.pokemonapp.dto.PokemonDTO;
+import com.pkm.pokemonapp.enums.Role;
 import com.pkm.pokemonapp.enums.Type;
 import com.pkm.pokemonapp.model.AjaxResponse;
 import com.pkm.pokemonapp.service.IPokemonService;
@@ -22,11 +24,12 @@ public class PokemonController {
     @ResponseBody
     @GetMapping("/read")
     public AjaxResponse read(@RequestParam long id) {
+        log.debug("URL requested: /api/pokemon/read");
         try {
             PokemonDTO data = pokemonService.read(id);
             return new AjaxResponse(true, data,1);
         } catch (Exception e) {
-            log.error("Error reaching: /api/pokemon/read");
+            log.error("Error reaching: /api/pokemon/read", e);
             return new AjaxResponse(false, e.getMessage());
         }
     }
@@ -41,7 +44,7 @@ public class PokemonController {
             List<PokemonDTO> data = pokemonService.readAll();
             return new AjaxResponse(true, data, data.size());
         } catch (Exception e) {
-            log.info("Error reaching: /api/pokemon/readAll");
+            log.error("Error reaching: /api/pokemon/readAll", e);
             return new AjaxResponse(false, e.getMessage());
         }
     }

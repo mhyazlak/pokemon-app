@@ -1,0 +1,6 @@
+spring:
+  banner:
+    location: classpath:/META-INF/banner-prod.txt
+  flyway:
+    enabled: false
+

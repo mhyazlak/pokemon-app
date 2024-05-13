@@ -2,35 +2,38 @@ package com.pkm.pokemonapp.controller;
 
 import com.pkm.pokemonapp.config.CustomPrincipal;
 import com.pkm.pokemonapp.enums.MatchDecision;
-import com.pkm.pokemonapp.service.impl.MatchmakingService;
+import com.pkm.pokemonapp.service.impl.MatchmakingServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
-//@CrossOrigin(origins = "http://localhost:5173")
 @Slf4j
 public class MatchmakingController {
 
     @Autowired
-    private MatchmakingService matchmakingService;
+    private MatchmakingServiceImpl matchmakingService;
 
     @MessageMapping("/joinQueue")
     public void joinQueue(CustomPrincipal principal) {
-        matchmakingService.addToQueue(principal.getUser());
+        log.info("User {} has queued up", principal.getUser().getUsername());
+        try {
+            matchmakingService.addUserToQueue(principal.getUser());
+        } catch (Exception e) {
+            log.error("Error reaching: /joinQueue", e);
+        }
+
     }
 
-    @MessageMapping("/acceptMatch/{sessionId}")
-    public void acceptMatch(CustomPrincipal principal, @Payload MatchDecision matchDecision, @DestinationVariable String sessionId) {
+    @MessageMapping("/handlePlayerMatchDecision/{sessionId}")
+    public void handlePlayerMatchDecision(CustomPrincipal principal, @Payload MatchDecision matchDecision, @DestinationVariable String sessionId) {
 
-        log.info("Session ID: {}", sessionId);
-        log.info("Match decision: {}", matchDecision.name());
+        //log.info("Session ID: {}, {},by {}", sessionId, matchDecision.name(), principal.getName());
 
-        matchmakingService.handlePlayerMatchDecision(principal.getUser(), matchDecision, sessionId);
+        //matchmakingService.handlePlayerMatchDecision(principal.getUser(), matchDecision, sessionId);
     }
 
 }

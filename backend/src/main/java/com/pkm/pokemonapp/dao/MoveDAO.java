@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class MoveDAO {
 
-    private static final String MOVES_FOR_MEMBER = "SELECT move_id as id, name as name, `type`, `power`, `accuracy` FROM MOVESET_VIEW WHERE member_id = ?1";
+    private static final String MOVES_FOR_MEMBER = "SELECT move_id as id, name as name, `type`, `power`, `accuracy`, `damage_class` FROM MOVESET_VIEW WHERE member_id = ?1";
 
     @PersistenceContext
     EntityManager entityManager;

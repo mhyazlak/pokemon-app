@@ -1,0 +1,42 @@
+server:
+  servlet:
+    context-path: "/"
+  error:
+    path: "/error"
+
+app:
+  debug: false
+  version: ${BUILD_ID}
+  filterSanitiser: "[^-a-zA-Z0-9??????? ]"
+
+catalina:
+  home: /usr/local/tomcat/
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${JDBC_DB_URL}
+    username: ${JDBC_DB_USER}
+    password: ${JDBC_DB_PASSWORD}
+  jpa:
+    database: default
+    database-platform: default
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    generate-ddl: false
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
+        dialect: org.hibernate.dialect.MariaDBDialect
+        enable_lazy_load_no_trans: true
+        legacy_limit_handler: true
+  thymeleaf:
+    prefix: "classpath:/static/vue-dist/"
+
+logging:
+  level:
+    root: WARN

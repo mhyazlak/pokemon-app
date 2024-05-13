@@ -44,4 +44,5 @@ public class TeamDAO {
         query.setParameter(1, userId);
         return (TeamDTO) query.getSingleResult();
     }
+
 }

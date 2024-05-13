@@ -10,5 +10,7 @@ public interface ITeamMemberService {
 
     public void updateMember(TeamMemberDTO teamMemberDTO);
 
-    void addMember(long teamId, long pokemonId);
+    public long addMember(long teamId, TeamMemberDTO teamMemberDTO);
+
+    public void updateMoveset(long newMemberId);
 }

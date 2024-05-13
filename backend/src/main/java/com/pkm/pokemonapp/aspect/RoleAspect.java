@@ -23,10 +23,16 @@ public class RoleAspect {
     @Around("execution(* com.pkm.pokemonapp.controller.*.*(..)) and @annotation(accessRole)")
     public Object checkPermission(final ProceedingJoinPoint joinPoint, final AccessRole accessRole) throws Throwable {
         final AuthorizedUser user = (AuthorizedUser) SessionUtil.getSession().getAttribute("user");
-        final List<Role> userRoles = Arrays.asList(accessRole.roles());
-        if (userRoles.stream().anyMatch(r -> r == user.getRole())) {
-            return joinPoint.proceed();
+        final List<Role> userRoles = user.getRoles(); // Assuming getRoles returns List<Role>
+        final List<Role> requiredRoles = Arrays.asList(accessRole.roles());
+
+        // Check if the user has any of the roles required by the method
+        boolean hasRequiredRole = userRoles.stream().anyMatch(requiredRoles::contains);
+
+        if (hasRequiredRole) {
+            return joinPoint.proceed(); // User has at least one of the required roles
+        } else {
+            throw new SecurityException(user.getUser() + " does not have the required permission.");
         }
-        throw new Exception(user.getUser() + " has no permission.");
     }
 }

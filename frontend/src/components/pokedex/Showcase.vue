@@ -1,12 +1,12 @@
 <template>
-  <div class="showcase-container">
-    <div v-if="selectedEntry" class="pokemon-showcase">
-      <img :src="`${selectedEntry.sprite}`" alt="Selected Pokémon" class="pokemon-sprite" />
+    <div class="showcase-container">
+        <div v-if="selectedEntry" class="pokemon-showcase">
+            <img :src="`${selectedEntry.sprite}`" alt="Selected Pokémon" class="pokemon-sprite" />
+        </div>
     </div>
-  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { usePokemonStore } from '@/stores/pokemonStore'
 
@@ -16,8 +16,8 @@ const selectedEntry = computed(() => store.selectedPokemon)
 
 <style scoped>
 .pokemon-sprite {
-  width: 100px; /* Adjust based on your preference */
-  height: 100px; /* Adjust based on your preference */
-  /* More styles as needed */
+    width: 100px; /* Adjust based on your preference */
+    height: 100px; /* Adjust based on your preference */
+    /* More styles as needed */
 }
 </style>

@@ -33,7 +33,6 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
                 Principal principal = new CustomPrincipal(authorizedUser.getUser());
 
                 // Store the CustomPrincipal in the attributes
-                // Note: The actual Principal should be set later in a ChannelInterceptor or by the framework
                 attributes.put("principal", principal);
             }
         }
@@ -44,6 +43,6 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                WebSocketHandler wsHandler, Exception exception) {
-        // ...
+
     }
 }

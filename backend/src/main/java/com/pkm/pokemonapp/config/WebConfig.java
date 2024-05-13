@@ -33,12 +33,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173","https://pkm-production.up.railway.app/")
+                .allowedOrigins("http://localhost:5173","http://localhost:8080"
+                        ,"https://pkm-production.up.railway.app/")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
-    
+
     @Bean(name = "preAuthProvider")
     PreAuthenticatedAuthenticationProvider preauthAuthProvider() throws Exception {
         final PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();

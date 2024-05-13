@@ -1,5 +1,6 @@
 package com.pkm.pokemonapp.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TokenService {
 
     @Autowired

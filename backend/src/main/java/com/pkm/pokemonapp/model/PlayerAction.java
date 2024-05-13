@@ -1,15 +1,29 @@
 package com.pkm.pokemonapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pkm.pokemonapp.enums.ActionType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-public class PlayerAction {
+import java.io.Serializable;
 
-    @Getter
-    ActionType actionType;
+@Data
+@NoArgsConstructor
+public class PlayerAction implements Serializable {
 
-    @Getter
-    long actionId;
+    @JsonProperty("action_type")
+    private ActionType actionType;
+
+    @JsonIgnore
+    private int speed; // needed for priority queue order
+    @JsonProperty("move_index")
+    private int moveIndex;
+    @JsonIgnore
+    private long playerId;
+    @JsonProperty("target_index")
+    private int targetIndex;
+    @JsonIgnore
+    private boolean concluded;
+
 }

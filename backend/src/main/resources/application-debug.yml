@@ -1,0 +1,22 @@
+spring:
+  banner:
+    location: classpath:META-INF/banner-debug.txt
+  flyway:
+    enabled: true
+    clean-disabled: false
+    clean-on-validation-error: true
+    locations: classpath:db/migration
+    driver: org.mariadb.jdbc.Driver
+    url: ${JDBC_DB_URL}
+    user: ${JDBC_DB_USER}
+    password: ${JDBC_DB_PASSWORD}
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+        messaging: INFO
+        web.socket: INFO
+      flywaydb:
+        core: INFO  # Add this line to enable DEBUG logging for Flyway

@@ -8,8 +8,6 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 public class BattleSession {
-
     private String sessionId;
-    GameState gameState;
-
+    SimpleGamestate gameState;
 }

@@ -53,23 +53,27 @@ public class PokemonDTO {
     @JsonProperty("base_spd")
     private int baseSpd;
 
-    @Column(name = "base_spe", nullable = false)
-    @JsonProperty("base_spe")
+    @Column(name = "base_speed", nullable = false)
+    @JsonProperty("base_speed")
     private int baseSpe;
 
     @Column(name = "base_total", nullable = false)
     @JsonProperty("base_total")
     private int baseTotal;
 
-    @Column(name = "sprite", nullable = false)
-    @JsonProperty("sprite")
-    private String sprite;
+    @Column(name = "front_sprite", nullable = false)
+    @JsonProperty("front_sprite")
+    private String frontSprite;
+
+    @Column(name = "back_sprite", nullable = false)
+    @JsonProperty("back_sprite")
+    private String backSprite;
 
     @Column(name = "icon_b64", nullable = false)
     @JsonProperty("icon_b64")
     private String icon_b64;
 
-    @Column(name="stage", nullable = false)
+    @Column(name = "stage", nullable = false)
     @JsonProperty("stage")
     private int stage;
 }

@@ -1,11 +1,10 @@
 package com.pkm.pokemonapp.service.impl;
 
 import com.pkm.pokemonapp.dao.TeamDAO;
-import com.pkm.pokemonapp.dto.TeamDTO;
-import com.pkm.pokemonapp.dto.TeamMemberDTO;
-import com.pkm.pokemonapp.dto.UserDTO;
+import com.pkm.pokemonapp.dto.*;
 import com.pkm.pokemonapp.service.ITeamMemberService;
 import com.pkm.pokemonapp.service.ITeamService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TeamServiceImpl implements ITeamService {
 
     @Autowired
@@ -59,34 +59,43 @@ public class TeamServiceImpl implements ITeamService {
         for (TeamMemberDTO newMember : team.getMembers()) {
             if (!currentMemberMap.containsKey(newMember.getPokemon().getId())) {
                 // This is a new member, so add it using the member service
-                memberService.addMember(team.getId(), newMember.getPokemon().getId());
+                long newMemberId = memberService.addMember(team.getId(), newMember);
+                updateMoveset(newMemberId, newMember.getMoveset());
             }
         }
-        // TODO
-        // Optionally, you can also check for members that need to be removed
-        // if the team members can also be removed in the new configuration.
-        // If so, you would also loop through the current members and remove
-        // any that are not present in the new team.
-
-        // After adding new members (and potentially removing old ones), you may want
-        // to update the rest of the team information as needed and save the changes.
-        // This could involve updating team details and persisting them back to the database.
-
-        // Example: Update team name if it has changed
         if (!currentTeam.getName().equals(team.getName())) {
             currentTeam.setName(team.getName());
-            //teamDAO.save(currentTeam);
         }
-
-        // Save other changes to team as necessary...
     }
 
     @Override
     public TeamDTO getSelectedTeam(long userId) {
         TeamDTO team = teamDAO.getSelectedTeam(userId);
         List<TeamMemberDTO> members = memberService.readTeamMembers(team.getId());
+
+        // this team is used for the intial gamestate at the start of the match
+        // deliver the members with actual live stats after calculating, set the values for stats and the live stats
+        for (TeamMemberDTO member : members) {
+            setInitialStats(member);
+        }
+
         team.setMembers(members);
         return team;
+    }
+
+    private void setInitialStats(TeamMemberDTO member) {
+        // setting initial current stats
+        // stats are being calculated in db when inserting a teammember
+        member.setCurrentHp(member.getMaxHp());
+        member.setCurrentAtk(member.getAtk());
+        member.setCurrentDef(member.getDef());
+        member.setCurrentSpa(member.getSpa());
+        member.setCurrentSpd(member.getSpd());
+        member.setCurrentSpeed(member.getSpeed());
+    }
+
+    private void updateMoveset(long newMemberId, List<MoveDTO> moveset) {
+        memberService.updateMoveset(newMemberId);
     }
 
 }

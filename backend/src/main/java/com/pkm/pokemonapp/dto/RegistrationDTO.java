@@ -1,6 +1,7 @@
 package com.pkm.pokemonapp.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RegistrationDTO {
 
-private String username;
+    @JsonProperty("username")
+    private String username;
 
-private String password;
+    @JsonProperty("password")
+    private String password;
+
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("alias_name")
+    private String aliasName;
 
 }
